@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchTrendingSongs } from "../services/songAPI";
 import SongCard from "../components/SongCard";
+import Search from "../components/Search";
 
 function Home() {
   const [trendingSongs, setTrendingSongs] = useState([]);
@@ -20,11 +21,17 @@ function Home() {
 
   return (
     <div className="home-page">
-      <h1>Trending Songs</h1>
-      <div className="song-list">
-        {trendingSongs.map((song) => (
-          <SongCard key={song.id} song={song} />
-        ))}
+      {/* Search Bar */}
+      <Search />
+
+      {/* Trending Songs */}
+      <div className="trending-section">
+        <h2 className="retro-title">Trending Songs</h2>
+        <div className="horizontal-song-list">
+          {trendingSongs.map((song) => (
+            <SongCard key={song.id} song={song} />
+          ))}
+        </div>
       </div>
     </div>
   );

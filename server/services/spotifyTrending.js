@@ -112,6 +112,12 @@ async function getTrendingSongs() {
 
     return sortedTracks.map((track, index) => ({
       rank: index + 1,
+      // Spotify IDs - very useful for components!
+      id: track.id,                    // Unique track ID
+      track_id: track.id,              // Alternative name for clarity
+      artist_ids: track.artists.map(a => a.id),  // Array of artist IDs
+      album_id: track.album.id,        // Album ID
+      // Track details
       name: track.name,
       artist: track.artists.map((a) => a.name).join(", "),
       album: track.album.name,

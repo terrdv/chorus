@@ -1,5 +1,5 @@
 const express = require("express");
-const { fetchTrending, testConnection } = require("../controllers/spotifyController");
+const { fetchTrending, testConnection, searchSongs, autoComplete, getSong } = require("../controllers/spotifyController");
 
 const router = express.Router();
 
@@ -13,5 +13,14 @@ router.get("/trending", fetchTrending);
 router.get("/test", (req, res) => {
   res.json({ message: "Spotify routes are working!" });
 });
+
+// Search songs from Spotify
+router.get("/search", searchSongs);
+
+// Auto-complete search
+router.get("/autocomplete", autoComplete);
+
+// Get single song by ID
+router.get("/song/:songId", getSong);
 
 module.exports = router;

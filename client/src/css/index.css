@@ -1,68 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=VT323&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --retro-primary: #00ff88;
+  --retro-secondary: #39ff14;
+  --retro-accent: #00d4ff;
+  --retro-dark: #1a1a2e;
+  --retro-darker: #16213e;
+  --retro-light: #f8f8f8;
+  --retro-text: #e8e8e8;
+  --retro-glow: #00ff88;
+  --retro-shadow: rgba(0, 255, 136, 0.3);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  font-family: 'Orbitron', monospace;
+  background: linear-gradient(135deg, var(--retro-dark) 0%, var(--retro-darker) 100%);
+  color: var(--retro-text);
   min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, var(--retro-shadow) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, var(--retro-shadow) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Retro Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--retro-glow);
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(45deg, var(--retro-primary), var(--retro-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
 }
 
+/* Retro Links */
+a {
+  color: var(--retro-accent);
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+a::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--retro-primary);
+  transition: width 0.3s ease;
+}
+
+a:hover::before {
+  width: 100%;
+}
+
+a:hover {
+  color: var(--retro-primary);
+  text-shadow: 0 0 8px var(--retro-glow);
+}
+
+/* Retro Buttons */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-family: 'Orbitron', monospace;
+  background: linear-gradient(45deg, var(--retro-primary), var(--retro-secondary));
+  border: 2px solid var(--retro-accent);
+  color: var(--retro-light);
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: 0 4px 15px var(--retro-shadow);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--retro-shadow);
+  border-color: var(--retro-primary);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus {
+  outline: 2px solid var(--retro-accent);
+  outline-offset: 2px;
+}
+
+/* Retro Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--retro-dark);
+  border: 1px solid var(--retro-accent);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--retro-primary), var(--retro-secondary));
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--retro-secondary), var(--retro-primary));
+}
+
+/* Retro Selection */
+::selection {
+  background: var(--retro-primary);
+  color: var(--retro-light);
+}
+
+::-moz-selection {
+  background: var(--retro-primary);
+  color: var(--retro-light);
+}
+
+/* Retro Focus */
+*:focus {
+  outline: 2px solid var(--retro-accent);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
   }
-  a:hover {
-    color: #747bff;
+  
+  body {
+    font-size: 14px;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+/* Retro Animation Keyframes */
+@keyframes retroGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--retro-glow);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--retro-glow), 0 0 30px var(--retro-glow);
+  }
+}
+
+@keyframes retroFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes retroPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
   }
 }
